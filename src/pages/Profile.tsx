@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Pencil } from "lucide-react";
 
 const Profile = () => {
-  const { profileId } = useParams();
+  // const { profileId } = useParams();
 
   return (
     <div className="p-10 flex justify-center w-full">
@@ -29,7 +29,7 @@ const Profile = () => {
               <Pencil size={13} />
               Edit
             </Button>
-          </div>
+          </div> 
         </div>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, nesciunt quibusdam obcaecati excepturi molestias nisi minus voluptate non explicabo fuga!
         </p>

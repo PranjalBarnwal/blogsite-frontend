@@ -10,6 +10,7 @@ import {
   createHashRouter,
   RouterProvider,
 } from "react-router-dom";
+import ForgotPass from './pages/ForgotPass.tsx'
 
 const router = createHashRouter([
   {
@@ -31,6 +32,10 @@ const router = createHashRouter([
       {
         path: "blogs",
         element: <Blogs />,
+      },
+      {
+        path: "forgotPass",
+        element: <ForgotPass />,
       },
     ]
     // errorElement: <ErrorPage />,
