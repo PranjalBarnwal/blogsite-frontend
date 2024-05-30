@@ -9,7 +9,7 @@ const Navbar = () => {
 
     <Link to="signup">Signup</Link>
       <Link to="signin">Signin</Link>
-      <Link to="profile">Profile</Link>
+      <Link to="profile/123">Profile</Link>
       <Link to="blogs">Blogs</Link>
       <Button type="submit" className="">
         Create a Blog
