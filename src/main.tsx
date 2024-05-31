@@ -13,6 +13,7 @@ import ForgotPass from "./pages/ForgotPass.tsx";
 import store from "./store.ts";
 import { Provider } from "react-redux";
 import ResetPassword from "./pages/ResetPassword.tsx";
+import CreateBlog from "./pages/CreateBlog.tsx";
 
 const router = createHashRouter([
   {
@@ -46,6 +47,10 @@ const router = createHashRouter([
       {
         path: "resetPassword",
         element: <ResetPassword />,
+      },
+      {
+        path: "createBlog",
+        element: <CreateBlog />,
       },
     ],
     // errorElement: <ErrorPage />,
