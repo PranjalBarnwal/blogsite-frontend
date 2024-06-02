@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToken, addUserId } from "@/slice/userSlice";
+import { addToken, addIdandName } from "@/slice/userSlice";
 
 
 
@@ -39,7 +39,7 @@ const Signup = () => {
     if (response.ok) {
       const data = await response.json();
       dispatch(addToken(data.jwt));
-      dispatch(addUserId(data.id));
+      dispatch(addIdandName(data));
       navigate("/completeProfile");
     }
   };

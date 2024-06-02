@@ -202,7 +202,7 @@ const CompleteProfile = () => {
             onChange={(e) =>
               setProfileFields((prev) => ({
                 ...prev,
-                securityAns: e.target.value.toLowerCase().trim(),
+                securityAns: e.target.value,
               }))
             }
           />

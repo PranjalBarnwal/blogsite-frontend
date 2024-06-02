@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDispatch } from "react-redux";
-import { addToken } from "@/slice/userSlice";
+import { addCompleteDetails, addIdandName, addToken } from "@/slice/userSlice";
 import { useNavigate } from "react-router-dom";
 const Signin = () => {
   const dispatch = useDispatch();
@@ -36,6 +36,8 @@ const Signin = () => {
         const data = await response.json();
         if(data.jwt){
           dispatch(addToken(data.jwt));
+          dispatch(addIdandName(data));
+          dispatch(addCompleteDetails(data));
           navigate("/blogs");
         }
         else console.log("error while logging in");

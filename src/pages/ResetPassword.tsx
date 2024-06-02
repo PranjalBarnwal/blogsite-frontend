@@ -16,34 +16,40 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ResetPassword = () => {
-    const [err,setErr]=useState("");
+  const [err, setErr] = useState("");
   const [pass, setPass] = useState("");
   const [pass2, setPass2] = useState("");
   //@ts-ignore
   const id = useSelector((state) => state.user.id);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const options = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },  
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-        id,
-        password:pass
+      id,
+      password: pass,
     }),
   };
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setErr("");
-    if(pass!==pass2) setErr("please write same password in both fields");
-    const response = await fetch("http://127.0.0.1:8787/api/v1/user/resetPassword",options);
-    if(response.ok){
-        const data=await response.json();
-        if(data.id){
-            console.log(data);
-            
-            navigate("/signin");
-        }
-    }else {
-        setErr("error while updating password");
+    if (pass !== pass2) {
+      setErr("please write same password in both fields");
+      return;
+    }
+    const response = await fetch(
+      "http://127.0.0.1:8787/api/v1/user/resetPassword",
+      options
+    );
+    if (response.ok) {
+      const data = await response.json();
+      if (data.id) {
+        console.log(data);
+
+        navigate("/signin");
+      }
+    } else {
+      setErr("error while updating password");
     }
   };
   return (
@@ -79,7 +85,7 @@ const ResetPassword = () => {
                 required
               />
             </div>
-            {err&&<div className="text-red-700">{err}</div>}
+            {err && <div className="text-red-700">{err}</div>}
             <Button type="submit" className="w-full" onClick={handleSubmit}>
               Reset
             </Button>

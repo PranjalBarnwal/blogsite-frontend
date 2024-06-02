@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUserId } from "@/slice/userSlice";
+import { addIdandName } from "@/slice/userSlice";
 const ForgotPass = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const ForgotPass = () => {
         const data = await response.json();
         if (data.result == true) {
           console.log("verified");
-          dispatch(addUserId(data.id));
+          dispatch(addIdandName(data.id));
           navigate("/resetPassword");
         }
         if (data.result == false) {

@@ -5,7 +5,7 @@ import Signup from "./pages/Signup.tsx";
 import Signin from "./pages/Signin.tsx";
 import CompleteProfile from "./pages/CompleteProfile.tsx";
 import Blogs from "./pages/Blogs.tsx";
-
+import ViewBlog from "./pages/ViewBlog.tsx";
 import Profile from "./pages/Profile.tsx";
 import "./index.css";
 import { createHashRouter, RouterProvider } from "react-router-dom";
@@ -35,6 +35,10 @@ const router = createHashRouter([
       {
         path: "profile/:profileId",
         element: <Profile />,
+      },
+      {
+        path: "post/:postId",
+        element: <ViewBlog />,
       },
       {
         path: "blogs",
