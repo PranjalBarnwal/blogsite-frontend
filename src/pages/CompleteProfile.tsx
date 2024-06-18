@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
-
+import { convertBase64 } from "@/components/utils/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DEFAULT_IMG } from "@/constants";
 import {
@@ -23,19 +23,7 @@ import { addCompleteDetails } from "@/slice/userSlice";
 
 
 const CompleteProfile = () => {
-  const convertBase64 = (file: any) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
+ 
   //@ts-ignore
   const id=useSelector((state)=>state.user.id)
   const dispatch=useDispatch();
@@ -57,7 +45,7 @@ const CompleteProfile = () => {
   };
   const checkFields=(fields:any)=>{
     const link=fields.social;
-    if(link.includes("linkedin.com")||link.includes("twitter.com")) return true;
+    if(link.includes("linkedin.com")||link.includes("x.com")) return true;
     else return false;
   }
   const options = {

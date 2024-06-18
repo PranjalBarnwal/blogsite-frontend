@@ -59,7 +59,9 @@ const ForgotPass = () => {
         const data = await response.json();
         if (data.result == true) {
           console.log("verified");
-          dispatch(addIdandName(data.id));
+          console.log(data);
+          
+          dispatch(addIdandName(data));
           navigate("/resetPassword");
         }
         if (data.result == false) {

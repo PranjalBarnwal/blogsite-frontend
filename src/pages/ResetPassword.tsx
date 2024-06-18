@@ -45,7 +45,8 @@ const ResetPassword = () => {
       const data = await response.json();
       if (data.id) {
         console.log(data);
-
+        console.log("reset successful");
+        
         navigate("/signin");
       }
     } else {

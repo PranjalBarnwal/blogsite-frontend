@@ -79,6 +79,8 @@ const Blogs = () => {
       const data = await response.json();
       if (response.ok) {
         setBlogPreviews(data.posts);
+        console.log(data.posts);
+        
       } else {
         console.log(data.error);
       }
@@ -139,7 +141,7 @@ const Blogs = () => {
             </span>
           ))}
         </div>
-        <div className="mt-5 flex flex-wrap">
+        <div className="mt-5 ">
           {blogPreviews.map((blogPreview: any, index: any) => (
             <Link key={index} to={`/post/${blogPreview.id}`}>
               <BlogPreview
