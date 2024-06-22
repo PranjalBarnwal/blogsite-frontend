@@ -1,0 +1,15 @@
+- upvotes and downvotes and views update
+- listing blogs of a author on its profile
+- listed blogs showing tags(issue)
+- shimmer everywhere
+- toast messages
+- type email and required field checks
+- searching and filter 
+- anonymous feature 
+- suggest a feature page implementation
+- copy to clipboard
+- profile page information filling
+- redirecting to login page if user not logged in
+- devBlogs home page(minimalist and good looking)
+- disabling button while processing or api call
+-   
