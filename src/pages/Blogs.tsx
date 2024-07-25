@@ -1,24 +1,4 @@
-// import { Button } from "@/components/ui/button";
-import {
-  Calculator,
-  Pencil,
-  CreditCard,
-  Settings,
-  Smile,
-  User,
-} from "lucide-react";
 
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command";
-// ---
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import BlogPreview from "@/components/utils/BlogPreview";
@@ -28,8 +8,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Menu from "@/components/utils/Menu";
