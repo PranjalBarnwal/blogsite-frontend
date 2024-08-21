@@ -89,15 +89,16 @@ const CreateBlog = () => {
 
     ["clean"],
   ];
-  const tags = [
-    "Fresher",
-    "Selected",
-    "Amazon",
-    "Apple",
-    "React",
-    "Full-Stack",
-    "Java",
+  const allTags = [
+    "fresher",
+    "selected",
+    "amazon",
+    "apple",
+    "react",
+    "full-stack",
+    "java",
   ];
+  const tags=allTags.map((tag)=>tag.toLowerCase());
   const module = {
     toolbar: toolbarOptions,
   };

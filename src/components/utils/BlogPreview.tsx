@@ -19,8 +19,11 @@ const BlogPreview = ({
       </Avatar>
       {/* </div> */}
       <div>
-        <p className="font-semibold">{title}</p>
-        <p>{truncatedContent}</p>
+        <p className="font-bold capitalize">{title}</p>
+        <p
+          className="text-gray-600 text-opacity-70  h-[50px] line-clamp-2  w-[65%] leading-[25px] text-ellipsis"
+          dangerouslySetInnerHTML={{ __html: content }}
+        ></p>
         <p className="flex text-[.7rem] items-center text-gray-400">
           <CalendarDays className="w-4" />
           Posted {publishedAt}

@@ -30,20 +30,20 @@ const ViewBlog = () => {
   const blogTitle = blogData?.title;
   const blogContent = blogData?.content;
   const blogVotes = blogData?.Vote ?? [];
- 
+
   const blogTags = blogData?.tags;
   const blogReadtime = blogData?.readtime;
   const headers = new Headers({
     Authorization: `Bearer ${jwtToken}`,
   });
-  
+
   const invertVote = (voteType: any) => {
     if (voteType === UPVOTE)
       setUpvote((upvote: any) => {
         console.log(!upvote + "-" + downvote);
         return !upvote;
       });
-    else
+    else if (voteType === DOWNVOTE)
       setDownvote((downvote: any) => {
         console.log(upvote + "-" + !downvote);
         return !downvote;
@@ -90,9 +90,10 @@ const ViewBlog = () => {
       console.log("diff" + indexOfDiff);
       if (indexOfSame != -1) {
         console.log(blogVotes[indexOfSame].id);
-
         await deleteVote(blogVotes[indexOfSame].id);
         blogVotes.splice(indexOfSame, 1);
+        console.log("called");
+        
         invertVote(voteType);
       } else if (indexOfDiff != -1) {
         await deleteVote(blogVotes[indexOfDiff].id);
@@ -137,7 +138,10 @@ const ViewBlog = () => {
       const data = await response.json();
       console.log(data.blog);
       setBlogData(data.blog);
-      // const voteType = blogData?.Vote?.find((vote: any) => vote.userId == id);
+      console.log(blogVotes);
+  
+      const voteType = data.blog?.Vote?.find((vote: any) => vote.userId == id)?.voteType;
+      invertVote(voteType);
     }
   };
 
@@ -168,9 +172,7 @@ const ViewBlog = () => {
               {id && (
                 <div
                   className={`share flex flex-col items-center space-y-[-3px] text-center ${
-                    disable
-                      ? "pointer-events-none cursor-not-allowed"
-                      : "cursor-pointer"
+                    disable ? "cursor-wait" : "cursor-pointer"
                   }`}
                 >
                   <ThumbsUp
@@ -182,16 +184,16 @@ const ViewBlog = () => {
               )}
               {id && (
                 <div
-                className={`share flex flex-col items-center space-y-[-3px] text-center ${
-                  disable ? "pointer-events-none cursor-not-allowed" : "cursor-pointer"
-                }`}
-              >
-                <ThumbsDown
-                  className={`${downvote ? "text-red-600" : "text-gray-600"}`}
-                  onClick={() => !disable && processVote(DOWNVOTE)}
-                />
-                <p className="text-xs">2k</p>
-              </div>
+                  className={`share flex flex-col items-center space-y-[-3px] text-center ${
+                    disable ? "cursor-wait" : "cursor-pointer"
+                  }`}
+                >
+                  <ThumbsDown
+                    className={`${downvote ? "text-red-600" : "text-gray-600"}`}
+                    onClick={() => !disable && processVote(DOWNVOTE)}
+                  />
+                  <p className="text-xs">2k</p>
+                </div>
               )}
               <div className="share flex flex-col items-center space-y-[-3px] text-center">
                 <Eye />

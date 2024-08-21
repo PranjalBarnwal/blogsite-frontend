@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import BlogPreview from "@/components/utils/BlogPreview";
@@ -14,7 +13,10 @@ import Menu from "@/components/utils/Menu";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+
 const Blogs = () => {
+  //@ts-ignore
+  const jwtToken = useSelector((state) => state.user.token);
   const [search, setSearch] = useState("Search");
   const tags = [
     "Fresher",
@@ -25,6 +27,8 @@ const Blogs = () => {
     "Full-Stack",
     "Java",
   ];
+ 
+
   const [activeTags, setActiveTags] = useState<string[]>([]);
   const [blogPreviews, setBlogPreviews] = useState<any>([]);
 
@@ -37,8 +41,7 @@ const Blogs = () => {
       prevTags.filter((existingTag) => existingTag !== tag)
     );
   };
-  //@ts-ignore
-  const jwtToken = useSelector((state) => state.user.token);
+
 
   useEffect(() => {
     const headers = new Headers({
@@ -47,7 +50,8 @@ const Blogs = () => {
 
     const fetchBlogs = async () => {
       const response = await fetch(
-        "http://127.0.0.1:8787/api/v1/blog/allPosts",
+        `http://127.0.0.1:8787/api/v1/blog/allPosts/${activeTags.length>0?activeTags.join(","):"nofilter"}`,
+        
         {
           method: "GET",
           headers,
@@ -58,13 +62,13 @@ const Blogs = () => {
       if (response.ok) {
         setBlogPreviews(data.posts);
         console.log(data.posts);
-        
       } else {
         console.log(data.error);
       }
     };
+    
     fetchBlogs();
-  }, []);
+  }, [activeTags]);
 
   return (
     <div className="h-full">
@@ -72,7 +76,7 @@ const Blogs = () => {
         <Menu />
       </div>
       <div className="w-full mt-10 flex flex-col items-center h-full">
-        <div className="flex max-w-[30rem] min-w-[20rem] ml-auto mr-auto items-center space-x-2">
+        <div className="flex max-w-[30rem] min-w-[20rem]  ml-auto mr-auto items-center space-x-2 min-h-[3rem]">
           <Input type="text" placeholder="Search" />
           <DropdownMenu>
             <DropdownMenuTrigger className=" flex items-center p-[0.4rem] rounded-md border-gray-400 border-[1px]">
@@ -112,16 +116,16 @@ const Blogs = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className="flex flex-wrap max-h-5/6  space-x-2 p-1 space-y-1 ">
+        <div className="flex flex-wrap max-h-5/6  items-center space-x-2 p-1 space-y-1">
           {activeTags.map((tag, index) => (
-            <span className="cursor-pointer" onClick={() => removeTag(tag)}>
+            <span key={index} className="cursor-pointer" onClick={() => removeTag(tag)}>
               <Tag key={index} name={tag} />
             </span>
           ))}
         </div>
         <div className="mt-5 ">
           {blogPreviews.map((blogPreview: any, index: any) => (
-            <Link key={index} to={`/post/${blogPreview.id}`}>
+            <Link key={blogPreview.id} to={`/post/${blogPreview.id}`}>
               <BlogPreview
                 key={index}
                 profileImg={blogPreview.author.profileImg}
