@@ -45,20 +45,18 @@ const Blogs = () => {
   const headers = new Headers({
     Authorization: `Bearer ${jwtToken}`,
   });
-
+  
   const fetchBlogs = async () => {
     setLoader(true);
+    setBlogPreviews([]); 
     try {
-      const response = await fetch(
-        `http://127.0.0.1:8787/api/v1/blog/allPosts/${
-          activeTags.length > 0 ? activeTags.join(",") : "nofilter"
-        }/${!!search.trim() ? search : "noquery"}`,
-        {
-          method: "GET",
-          headers,
-        }
-      );
-
+      const tags = activeTags.length > 0 ? activeTags.join(",") : "nofilter";
+      const query = search.trim() ? search : "noquery";
+      const response = await fetch(`http://127.0.0.1:8787/api/v1/blog/allPosts/${tags}/${query}`, {
+        method: "GET",
+        headers,
+      });
+  
       const data = await response.json();
       if (response.ok) {
         setBlogPreviews(data.posts);
@@ -72,15 +70,19 @@ const Blogs = () => {
       setLoader(false);
     }
   };
-
+  
   useEffect(() => {
     fetchBlogs();
   }, [activeTags]);
+  
+  useEffect(() => {
+    if(!search.trim())
+    fetchBlogs();
+  }, [search]);
 
   const handleSearch = () => {
     fetchBlogs();
   };
-
   return (
     <div className="h-full">
       <div className="fixed bottom-[2rem] right-[2.4rem]">
