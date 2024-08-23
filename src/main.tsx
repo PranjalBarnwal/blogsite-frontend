@@ -14,6 +14,8 @@ import store from "./store.ts";
 import { Provider } from "react-redux";
 import ResetPassword from "./pages/ResetPassword.tsx";
 import CreateBlog from "./pages/CreateBlog.tsx";
+import Loader from "./components/utils/Loader.tsx"
+
 
 const router = createHashRouter([
   {
@@ -55,6 +57,10 @@ const router = createHashRouter([
       {
         path: "createBlog",
         element: <CreateBlog />,
+      },
+      {
+        path: "test",
+        element: <Loader />,
       },
     ],
     // errorElement: <ErrorPage />,
